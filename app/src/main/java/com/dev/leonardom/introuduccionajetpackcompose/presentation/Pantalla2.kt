@@ -23,18 +23,20 @@ fun Pantalla2(
         verticalArrangement = Arrangement.spacedBy(20.dp)
     ){
         item{
-            Text(
-                text="Platos Típicos",
-                style = TextStyle(
-                    fontSize = 28.sp,
-                    fontWeight = FontWeight.Black
+
+                Text(
+                    text = "Platos Típicos",
+                    style = TextStyle(
+                        fontSize = 28.sp,
+                        fontWeight = FontWeight.Black
+                    )
                 )
-            )
 
 
         }
         items(listaPlatos){
-            PlatoDiseño(plato = it)
+
+            PlatoDiseño(plato = it,text)
         }
     }
 }
@@ -44,22 +46,22 @@ data class Plato(val nombre: String, val departamento:String)
 data class Publicidad(val titulo:String)
 
 private val listaPlatos= listOf(
-    Plato(nombre="Ceviche de Pescado",departamento="Arequipa"),
-    Plato(nombre="Lomo Saltado",departamento="Arequipa"),
+    Plato(nombre="Ceviche de Pescado",departamento="Lima"),
+    Plato(nombre="Lomo Saltado",departamento="Lima"),
     Plato(nombre="Papa Rellena",departamento="Arequipa"),
     Plato(nombre="Escabeche de Pescado",departamento="Arequipa"),
     Plato(nombre="Picarones",departamento="Arequipa"),
-    Plato(nombre="Arroz con Mariscos",departamento="Arequipa"),
+    Plato(nombre="Arroz con Mariscos",departamento="Junín"),
     Plato(nombre="Carapulcra",departamento="Arequipa"),
-    Plato(nombre="Tallarín Saltado Criollo",departamento="Arequipa"),
+    Plato(nombre="Tallarín Saltado Criollo",departamento="Loreto"),
     Plato(nombre="Pavo al Horno",departamento="Arequipa"),
-    Plato(nombre="Ají de Gallina",departamento="Arequipa"),
-    Plato(nombre="Arroz con Leche",departamento="Arequipa"),
+    Plato(nombre="Ají de Gallina",departamento="Ica"),
+    Plato(nombre="Arroz con Leche",departamento="Ica"),
     Plato(nombre="Tallarines Rojos",departamento="Arequipa"),
-    Plato(nombre="Chilcano de Pescado",departamento="Arequipa"),
-    Plato(nombre="Mazamorra Morada",departamento="Arequipa"),
-    Plato(nombre="Arroz a la Jardinera",departamento="Arequipa"),
-    Plato(nombre="Empanada de Carne",departamento="Arequipa"),
+    Plato(nombre="Chilcano de Pescado",departamento="Loreto"),
+    Plato(nombre="Mazamorra Morada",departamento="Junín"),
+    Plato(nombre="Arroz a la Jardinera",departamento="Tacna"),
+    Plato(nombre="Empanada de Carne",departamento="Tacna"),
     Plato(nombre="Tamales de Pollo o Chancho",departamento="Arequipa"),
     Plato(nombre="Turrón de Doña Pepa",departamento="Arequipa")
 )
@@ -70,23 +72,22 @@ private val listaPublicidad= listOf(
     Publicidad(titulo="Publicidad 4")
 )
 @Composable
-fun PlatoDiseño(plato:Plato) {
+fun PlatoDiseño(plato:Plato,text: String) {
     Row(
         modifier=Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
     )
     {
-        Text(
-            text= plato.nombre,
-            style= TextStyle(
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Light,
-                fontStyle = FontStyle.Italic
+        if(text==plato.departamento) {
+            Text(
+                text = plato.nombre,
+                style = TextStyle(
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Light,
+                    fontStyle = FontStyle.Italic
+                )
             )
-        )
-
+        }
     }
-    //DANPLAB2COMPOSETheme {
-    //  Greeting("Android")
-    //}
+
 }
