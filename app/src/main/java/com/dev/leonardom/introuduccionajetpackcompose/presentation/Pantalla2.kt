@@ -3,6 +3,7 @@ package com.dev.leonardom.introuduccionajetpackcompose.presentation
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -15,9 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun Pantalla2(
-    text: String
-) {
+fun Pantalla2(text: String) {
 
     LazyColumn(contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(20.dp)
@@ -25,7 +24,7 @@ fun Pantalla2(
         item{
 
                 Text(
-                    text = "Platos Típicos",
+                    text = "Comisarías",
                     style = TextStyle(
                         fontSize = 28.sp,
                         fontWeight = FontWeight.Black
@@ -34,37 +33,28 @@ fun Pantalla2(
 
 
         }
-        items(listaPlatos){
+        items(listaComisaria){
 
-            PlatoDiseño(plato = it,text)
+            ComisariaDiseño(comisaria = it,text)
         }
     }
 }
 
-data class Plato(val nombre: String, val departamento:String)
+data class Comisaria(val nombre: String, val departamento:String)
 
-data class Publicidad(val titulo:String)
 
-private val listaPlatos= listOf(
-    Plato(nombre="Ceviche de Pescado",departamento="Lima"),
-    Plato(nombre="Lomo Saltado",departamento="Lima"),
-    Plato(nombre="Papa Rellena",departamento="Arequipa"),
-    Plato(nombre="Escabeche de Pescado",departamento="Arequipa"),
-    Plato(nombre="Picarones",departamento="Arequipa"),
-    Plato(nombre="Arroz con Mariscos",departamento="Junín"),
-    Plato(nombre="Carapulcra",departamento="Arequipa"),
-    Plato(nombre="Tallarín Saltado Criollo",departamento="Loreto"),
-    Plato(nombre="Pavo al Horno",departamento="Arequipa"),
-    Plato(nombre="Ají de Gallina",departamento="Ica"),
-    Plato(nombre="Arroz con Leche",departamento="Ica"),
-    Plato(nombre="Tallarines Rojos",departamento="Arequipa"),
-    Plato(nombre="Chilcano de Pescado",departamento="Loreto"),
-    Plato(nombre="Mazamorra Morada",departamento="Junín"),
-    Plato(nombre="Arroz a la Jardinera",departamento="Tacna"),
-    Plato(nombre="Empanada de Carne",departamento="Tacna"),
-    Plato(nombre="Tamales de Pollo o Chancho",departamento="Arequipa"),
-    Plato(nombre="Turrón de Doña Pepa",departamento="Arequipa")
+
+private val listaComisaria= listOf(
+    Comisaria(nombre="Ceviche de Pescado",departamento="Lima"),
+    Comisaria(nombre="Lomo Saltado",departamento="Lima"),
+    Comisaria(nombre="Papa Rellena",departamento="Arequipa"),
+    Comisaria(nombre="Escabeche de Pescado",departamento="Arequipa"),
+    Comisaria(nombre="Picarones",departamento="Arequipa"),
+    Comisaria(nombre="Arroz con Mariscos",departamento="Junín"),
+    Comisaria(nombre="Carapulcra",departamento="Arequipa"),
+
 )
+data class Publicidad(val titulo:String)
 private val listaPublicidad= listOf(
     Publicidad(titulo="Publicidad 1"),
     Publicidad(titulo="Publicidad 2"),
@@ -72,22 +62,25 @@ private val listaPublicidad= listOf(
     Publicidad(titulo="Publicidad 4")
 )
 @Composable
-fun PlatoDiseño(plato:Plato,text: String) {
+fun ComisariaDiseño(comisaria:Comisaria,text: String) {
     Row(
         modifier=Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
     )
     {
-        if(text==plato.departamento) {
-            Text(
-                text = plato.nombre,
+        if(text==comisaria.departamento) {
+            Button(onClick = {mostrarDatos() }){
+                Text(comisaria.nombre,
                 style = TextStyle(
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Light,
                     fontStyle = FontStyle.Italic
-                )
-            )
+                ))
+            }
         }
     }
+
+}
+fun mostrarDatos(){
 
 }
