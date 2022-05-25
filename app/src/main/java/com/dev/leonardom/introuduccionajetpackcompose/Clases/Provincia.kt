@@ -10,14 +10,37 @@ object Provincia {
 
     private val provs: MutableList<Provi> = mutableListOf(
         Provi(
-            "Arequipa", true, false,
+            "Arequipa", true, true,
             true
         ),
         Provi(
-            "Provincia 2", true, false,
+            "Camana", true, true,
             true
         ),
-
+        Provi(
+            "Caraveli", false, true,
+            true
+        ),
+        Provi(
+            "Castilla", false, true,
+            true
+        ),
+        Provi(
+            "LaUnion", false, true,
+            true
+        ),
+        Provi(
+            "Condesuyos", false, true,
+            true
+        ),
+        Provi(
+            "Islay", true, true,
+            true
+        ),
+        Provi(
+            "Caylloma", true, true,
+            true
+        ),
         )
 
     fun getListIterator(): MutableListIterator<Provi> {

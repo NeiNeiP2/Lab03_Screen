@@ -32,7 +32,6 @@ fun Pantalla3(navController: NavController,text:String) {
                 )
             )
 
-            val comisaria="Comisaria";
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -41,13 +40,51 @@ fun Pantalla3(navController: NavController,text:String) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ){
                 val provi=Provincia.getProvincia(text)
-                if(provi.bomberos){
+                if(provi.comisaria){
                     val comisaria="Comisaria"
                     Button(
                         modifier = Modifier.fillMaxWidth().padding(10.dp),
                         onClick = {navController.navigate(route="pantalla2/"+provi.nombre+"/"+comisaria )}) {
                         Text(
                             "Comisaría",
+                            style = TextStyle(
+                                fontSize = 20.sp,
+                                fontWeight = FontWeight.Light,
+                                fontStyle = FontStyle.Italic
+
+                            )
+                        )
+
+                    }
+
+
+                }
+                if(provi.refugio){
+                    val hospital="CentroDeSalud"
+                    Button(
+                        modifier = Modifier.fillMaxWidth().padding(10.dp),
+                        onClick = {navController.navigate(route="pantalla2/"+provi.nombre+"/"+hospital )}) {
+                        Text(
+                            "Centro de Salud",
+                            style = TextStyle(
+                                fontSize = 20.sp,
+                                fontWeight = FontWeight.Light,
+                                fontStyle = FontStyle.Italic
+
+                            )
+                        )
+
+                    }
+
+
+                }
+                if(provi.bomberos){
+                    val bombero= "Bomberos"
+                    Button(
+                        modifier = Modifier.fillMaxWidth().padding(10.dp),
+                        onClick = {navController.navigate(route="pantalla2/"+provi.nombre+"/"+bombero )}) {
+                        Text(
+                            "Bomberos",
                             style = TextStyle(
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Light,

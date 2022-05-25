@@ -61,7 +61,7 @@ fun Pantalla1(
             }
         )
         var expandir by remember { mutableStateOf(false)}
-        val list = listOf("Arequipa", "Lima", "Junín","Provincia 4", "Provincia 5","Provincia 6", "Provincia 7", "Provincia 8" )
+        val list = listOf("Arequipa", "Camana", "Caraveli","Castilla", "LaUnion","Condesuyos", "Islay", "Caylloma" )
         var selectedItem by remember { mutableStateOf("")}
         var textFiledSize by remember{ mutableStateOf(Size.Zero)}
 
