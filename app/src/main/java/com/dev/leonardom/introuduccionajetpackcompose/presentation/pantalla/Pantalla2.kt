@@ -3,13 +3,15 @@ package com.dev.leonardom.introuduccionajetpackcompose.presentation
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.compiler.plugins.kotlin.lower.forEachWith
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,6 +25,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -51,31 +54,27 @@ fun Pantalla2(navController: NavController, text3: String, text4: String) {
             item{
                 if(text2!="CentroDeSalud"){
                     Text(
-                        text = text2,
+                        text = text2+" - "+ text,
                         style = TextStyle(
                             fontSize = 28.sp,
                             fontWeight = FontWeight.Black
-                        )
+                        ),textAlign = TextAlign.Center
                     )
                 }
                 else{
                     Text(
-                        text = "Centro de Salud",
+                        text = "Centro de Salud - "+text,
                         style = TextStyle(
                             fontSize = 28.sp,
                             fontWeight = FontWeight.Black
-                        )
+                        ),textAlign = TextAlign.Center
                     )
                 }
             }
             items(listaDatos){
-                        Row(
-                            modifier=Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        )
-                        {
+
                     ComisariaDiseño(dato = it,text,text2)
-                }
+
 
             }
         }
@@ -86,40 +85,62 @@ fun Pantalla2(navController: NavController, text3: String, text4: String) {
 
 }
 
-@Composable
-fun PublicidadDiseño(publicidad: Publicidad) {
-    Box(
-        modifier=Modifier.padding(end=8.dp).size(140.dp).clip(RoundedCornerShape(12))
-            .background(color=Color.LightGray), contentAlignment = Alignment.Center
-    )
-    {
-        Text(publicidad.titulo,
-                style = TextStyle(
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Black,
-                            fontStyle = FontStyle.Italic
-                        ))
-    }
-}
+
 @Composable
 fun ComisariaDiseño(dato:Datos,text: String, text2: String) {
+    var expandir by remember{ mutableStateOf(false)}
+    if (text == dato.provincia && text2 == dato.tipo) {
+    Column(modifier=Modifier.fillMaxWidth().border(2.dp,Color.Gray, RoundedCornerShape(8.dp))
+        .padding(8.dp).background(Color.LightGray, RoundedCornerShape(8.dp))) {
 
-                if(text==dato.provincia&&text2==dato.tipo){
-                    Button(onClick = {mostrarDatos() }){
-                        Text(dato.datos,
-                            style = TextStyle(
-                                fontSize = 20.sp,
-                                fontWeight = FontWeight.Light,
-                                fontStyle = FontStyle.Italic
-                            ))
-                    }
+            Row(
+                modifier=Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+
+            )
+            {
+                Text(text=dato.datos,modifier=Modifier.weight(1f), fontSize = 20.sp,fontWeight = FontWeight.Bold)
+                Icon(imageVector = Icons.Default.QuestionAnswer, contentDescription = null)
+
+
+            }
+        Row (
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.End)
+                ){
+
+            IconButton(onClick={expandir=!expandir
+
+            }){
+                Icon(imageVector = Icons.Default.ArrowRight, contentDescription = null)
+            }
+            if(expandir){
+                Text(text=dato.Dirección,modifier=Modifier.weight(1f))
+                OutlinedButton(onClick = {  }, contentPadding = PaddingValues(4.dp)) {
+                    Text(
+                        dato.Teléfono,
+                        style = TextStyle(
+                            fontSize = 15.sp,
+                            fontWeight = FontWeight.Light,
+                            fontStyle = FontStyle.Italic
+                        )
+                    )
                 }
+            }
+        }
+
+        }
+    }
 
 
 }
-fun mostrarDatos(){
+@Composable
+fun mostrarDatos(dato:Datos):Unit{
+
 
 }
+
+
 data class Datos(val datos: String,val Dirección:String, val Teléfono:String,val provincia:String,val tipo:String)
 
 private val listaDatos= listOf(
@@ -418,10 +439,4 @@ private val listaDatos= listOf(
         provincia="Caylloma",
         tipo="Bomberos"))
 
-data class Publicidad(val titulo:String)
-private val listaPublicidad= listOf(
-    Publicidad(titulo="Publicidad 1"),
-    Publicidad(titulo="Publicidad 2"),
-    Publicidad(titulo="Publicidad 3"),
-    Publicidad(titulo="Publicidad 4")
-)
+

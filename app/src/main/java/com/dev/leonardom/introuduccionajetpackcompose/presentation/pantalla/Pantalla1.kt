@@ -5,9 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Keyboard
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,7 +34,13 @@ fun Pantalla1(
    navController: NavController
 ) {
     var textValue by remember { mutableStateOf("") }
-
+    Button(onClick = { navController.navigate(route="pantalla4") },Modifier.padding(top = 7.dp),
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = MaterialTheme.colors.primary
+        )) {
+        Icon(imageVector = Icons.Default.Dangerous, contentDescription = null)
+        Text("  Emergencia")
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -48,9 +52,9 @@ fun Pantalla1(
             buildAnnotatedString {
                 withStyle(style = SpanStyle(fontSize = 37.sp,fontWeight = FontWeight.Bold)){
                     withStyle(style = SpanStyle(color = Color.Blue)) {
-                        append("N")
+                        append("L")
                     }
-                    append("úmeros de ")
+                    append("ugares de ")
 
                     withStyle(style = SpanStyle(color = Color.Red)) {
                         append("E")
@@ -59,7 +63,7 @@ fun Pantalla1(
                 }
 
             }
-        )
+        , textAlign = TextAlign.Center)
         var expandir by remember { mutableStateOf(false)}
         val list = listOf("Arequipa", "Camana", "Caraveli","Castilla", "LaUnion","Condesuyos", "Islay", "Caylloma" )
         var selectedItem by remember { mutableStateOf("")}
@@ -98,11 +102,9 @@ fun Pantalla1(
         }
 
 
-        Button(onClick = { navController.navigate(route="pantalla3/"+selectedItem) }) {
+        Button(onClick = { navController.navigate(route="pantalla3/"+selectedItem) },Modifier.padding(all = 10.dp)) {
             Text("Enviar")
         }
-        Button(onClick = { navController.navigate(route="pantalla4") }) {
-            Text("Emergencia")
-        }
+
     }
 }
