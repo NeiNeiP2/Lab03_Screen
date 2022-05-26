@@ -101,5 +101,8 @@ fun Pantalla1(
         Button(onClick = { navController.navigate(route="pantalla3/"+selectedItem) }) {
             Text("Enviar")
         }
+        Button(onClick = { navController.navigate(route="pantalla4") }) {
+            Text("Emergencia")
+        }
     }
 }

@@ -25,15 +25,18 @@ fun NavigationHost(navController:NavHostController) {
         }
         composable(
             Pantalla2.route,
-            arguments = listOf(navArgument("newText"){ type= NavType.StringType },
-            navArgument("newText2"){ type= NavType.StringType })
+            arguments = listOf(navArgument("newText"){ type= NavType.StringType
+                                                            defaultValue="Arequipa"},
+            navArgument("newText2"){ type= NavType.StringType
+                                            defaultValue="Comisaria"})
         ) {
             Pantalla2(
                 navController=navController, it.arguments?.getString("newText").toString(),
                  it.arguments?.getString("newText2").toString()
                )
-
-
+        }
+        composable(Pantalla4.route) {
+            Pantalla4(navController=navController)
         }
     }
 }

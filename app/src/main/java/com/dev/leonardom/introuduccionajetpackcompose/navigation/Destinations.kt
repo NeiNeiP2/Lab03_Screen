@@ -17,7 +17,7 @@ sealed class Destinations(
 
 
     object Pantalla2: Destinations("pantalla2/{newText}/{newText2}","Apoyo",Icons.Filled.Favorite)
-
+    object Pantalla4: Destinations("pantalla4","Emergencia", Icons.Filled.Email)
 
 
 

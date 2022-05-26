@@ -1,6 +1,7 @@
 package com.dev.leonardom.introuduccionajetpackcompose.presentation
 
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.compiler.plugins.kotlin.lower.forEachWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -26,13 +27,22 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toSize
+import androidx.constraintlayout.compose.ConstraintSet
+import androidx.datastore.core.DataStore
 import androidx.navigation.NavController
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dev.leonardom.introuduccionajetpackcompose.Clases.Provincia
 import com.dev.leonardom.introuduccionajetpackcompose.navigation.Destinations
+import java.util.prefs.Preferences
+
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun Pantalla2(navController: NavController, text: String, text2: String) {
-    Box{
+fun Pantalla2(navController: NavController, text3: String, text4: String) {
+    var text by remember { mutableStateOf("")}
+    var text2 by remember  { mutableStateOf("")}
+    Box(modifier=Modifier.fillMaxSize()){
+        text=text3
+        text2=text4
         val listState = rememberLazyListState()
         LazyColumn(contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(20.dp),
@@ -58,16 +68,13 @@ fun Pantalla2(navController: NavController, text: String, text2: String) {
                     )
                 }
             }
-            itemsIndexed(listaDatos){
-                posicion,producto->
-                if(posicion%5==0&&posicion!=0){
-                    LazyRow{
-                        items(listaPublicidad){
-                            PublicidadDiseño(publicidad=it)
-                        }
-                    }
-                }else{
-                    ComisariaDiseño(dato = producto,text,text2)
+            items(listaDatos){
+                        Row(
+                            modifier=Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        )
+                        {
+                    ComisariaDiseño(dato = it,text,text2)
                 }
 
             }
@@ -96,24 +103,18 @@ fun PublicidadDiseño(publicidad: Publicidad) {
 }
 @Composable
 fun ComisariaDiseño(dato:Datos,text: String, text2: String) {
-    Row(
-        modifier=Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween
-    )
-    {
-        if(text==dato.provincia) {
-            if(text2==dato.tipo){
-                Button(onClick = {mostrarDatos() }){
-                    Text(dato.datos,
-                        style = TextStyle(
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.Light,
-                            fontStyle = FontStyle.Italic
-                        ))
+
+                if(text==dato.provincia&&text2==dato.tipo){
+                    Button(onClick = {mostrarDatos() }){
+                        Text(dato.datos,
+                            style = TextStyle(
+                                fontSize = 20.sp,
+                                fontWeight = FontWeight.Light,
+                                fontStyle = FontStyle.Italic
+                            ))
+                    }
                 }
-            }
-        }
-    }
+
 
 }
 fun mostrarDatos(){

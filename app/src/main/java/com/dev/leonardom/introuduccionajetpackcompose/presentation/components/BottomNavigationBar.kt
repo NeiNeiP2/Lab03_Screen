@@ -24,12 +24,22 @@ fun BottomNavigationBar(
                 label={ Text(screen.title)},
                 selected =currentRoute==screen.route,
                 onClick = {
-                          navController.navigate(screen.route){
-                              popUpTo(navController.graph.findStartDestination().id){
-                                  saveState=true
-                              }
-                              launchSingleTop=true
-                          }
+                    if(screen.route=="pantalla2/{newText}/{newText2}"){
+                        navController.navigate("pantalla2/Arequipa/Comisaria"){
+                            popUpTo(navController.graph.findStartDestination().id){
+                                saveState=true
+                            }
+                            launchSingleTop=true
+                        }
+                    }else{
+                        navController.navigate(screen.route){
+                            popUpTo(navController.graph.findStartDestination().id){
+                                saveState=true
+                            }
+                            launchSingleTop=true
+                        }
+                    }
+
                 },
                 alwaysShowLabel=false
             )

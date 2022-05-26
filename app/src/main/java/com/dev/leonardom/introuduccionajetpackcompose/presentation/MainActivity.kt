@@ -36,7 +36,8 @@ fun MainScreen(){
     val navigationItems= listOf(
         Destinations.Pantalla1,
         Destinations.Pantalla3,
-        Destinations.Pantalla2
+        Destinations.Pantalla2,
+        Destinations.Pantalla4
 
 
 
